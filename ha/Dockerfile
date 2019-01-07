@@ -2,7 +2,7 @@
 FROM haproxy:1.5
 
 # TODO: [GEN] Replace with your name and email
-MAINTAINER Laurent Prevost <laurent.prevost@heig-vd.ch>
+MAINTAINER Johanna Melly <johanna.melly@heig-vd.ch> Yohann Meyer <yohann.meyer@heig-ch>
 
 # Install some tools
 # TODO: [HB] Update to install required tool to install NodeJS
@@ -18,8 +18,9 @@ RUN apt-get update && apt-get -y install wget curl vim iputils-ping rsyslog
 
 # TODO: [S6] Replace the two following instructions
 # Copy all the scripts and make them executable
-COPY scripts/ /scripts/
-RUN chmod +x /scripts/*.sh
+# Copy the S6 service and make the run script executable
+COPY services/ha /etc/services.d/ha
+RUN chmod +x /etc/services.d/ha/run
 
 # TODO: [Serf] Add Serf S6 setup
 
